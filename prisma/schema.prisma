@@ -14,6 +14,18 @@ datasource db {
 }
 
 model User {
-  id       String @id
-  username String @db.VarChar(255)
+  id           String      @id @default(uuid())
+  username     String      @db.VarChar(255)
+  email        String      @db.VarChar(50)
+  password     String      @db.VarChar(55)
+  profile      UserDetail? @relation(fields: [userDetailId], references: [id])
+  userDetailId String?
+}
+
+model UserDetail {
+  id      String   @id @default(uuid())
+  address String   @db.VarChar(255)
+  phone   String   @db.VarChar(20)
+  birth   DateTime
+  User    User[]
 }
