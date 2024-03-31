@@ -21,7 +21,6 @@ const authOptions = {
             }),
           }).then((data) => data.json());
 
-          console.log(user);
           const matchPassword = await bcrypt.compare(password, user.password);
 
           if (!user) {
@@ -32,6 +31,7 @@ const authOptions = {
             console.log("password not match");
             return null;
           }
+          console.log(user.username, "has signed in successfully");
           return {
             id: user.id,
             name: user.username,
