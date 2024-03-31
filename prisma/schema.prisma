@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -17,15 +11,17 @@ model User {
   id           String      @id @default(uuid())
   username     String      @db.VarChar(255)
   email        String      @db.VarChar(50)
-  password     String      @db.VarChar(55)
-  profile      UserDetail? @relation(fields: [userDetailId], references: [id])
+  password     String      @db.VarChar(255)
   userDetailId String?
+  createdAt    DateTime    @default(now())
+  loginCount   Int         @default(0)
+  profile      UserDetail? @relation(fields: [userDetailId], references: [id])
 }
 
 model UserDetail {
-  id      String   @id @default(uuid())
-  address String   @db.VarChar(255)
-  phone   String   @db.VarChar(20)
-  birth   DateTime
-  User    User[]
+  id           String   @id @default(uuid())
+  address      String   @db.VarChar(255)
+  birth_date   DateTime
+  phone_number String   @db.VarChar(20)
+  User         User[]
 }
