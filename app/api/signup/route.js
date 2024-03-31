@@ -28,7 +28,7 @@ export async function POST(request) {
         },
       });
       return NextResponse.json({
-        message: "Signup Successful",
+        message: "Sign up Successful",
         registered: true,
       });
     }
